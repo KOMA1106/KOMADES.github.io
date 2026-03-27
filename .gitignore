@@ -1,8 +1,11 @@
 # 备份文件夹
 portfolio-images-original/
+portfolio-images-backup/
 
 # 压缩脚本
 compress_images.py
+process_images.py
+process_kaixin.py
 
 # 临时文件
 *.temp.jpg
