@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赵珂玛 - 设计作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-white: #ffffff;
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e8e8e8;
+            --color-gray-300: #d1d1d1;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #737373;
+            --color-gray-600: #525252;
+            --color-gray-700: #404040;
+            --color-gray-800: #262626;
+            --color-gray-900: #171717;
+            --color-brown-light: #a89f96;
+            --color-brown: #8b7d6b;
+            --color-brown-dark: #6b5d4f;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background-color: var(--color-gray-100);
+            color: var(--color-gray-700);
+            line-height: 1.8;
+        }
+
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* A4横向尺寸 */
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: var(--color-white);
+            margin: 10mm auto;
+            padding: 20mm;
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* 封面页样式 */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .cover-decoration-left {
+            position: absolute;
+            left: 30mm;
+            top: 0;
+            bottom: 0;
+            width: 15mm;
+            background: linear-gradient(to bottom, var(--color-brown-light), var(--color-brown));
+            opacity: 0.15;
+        }
+
+        .cover-decoration-right {
+            position: absolute;
+            right: 30mm;
+            top: 0;
+            bottom: 0;
+            width: 8mm;
+            background: var(--color-brown-light);
+            opacity: 0.3;
+        }
+
+        .cover-subtitle {
+            font-size: 14px;
+            letter-spacing: 6px;
+            color: var(--color-gray-400);
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: 64px;
+            font-weight: 300;
+            letter-spacing: 16px;
+            color: var(--color-gray-800);
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .cover-line {
+            width: 80px;
+            height: 1px;
+            background: var(--color-brown);
+            margin: 0 auto 30px;
+        }
+
+        .cover-name {
+            font-size: 28px;
+            letter-spacing: 8px;
+            color: var(--color-gray-600);
+            margin-bottom: 20px;
+        }
+
+        .cover-contact {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            letter-spacing: 2px;
+        }
+
+        /* 个人简介页 */
+        .about-page {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30mm;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image-deco {
+            position: absolute;
+            left: -10mm;
+            top: -10mm;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--color-brown-light);
+            opacity: 0.4;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--color-gray-100);
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            padding: 20mm 0;
+        }
+
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 300;
+            color: var(--color-gray-200);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .about-title {
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--color-gray-800);
+            margin-bottom: 20px;
+        }
+
+        .about-line {
+            width: 40px;
+            height: 1px;
+            background: var(--color-brown);
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            font-size: 14px;
+            color: var(--color-gray-600);
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .about-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--color-brown-dark);
+            padding-left: 20px;
+            border-left: 1px solid var(--color-brown-light);
+            margin-top: 30px;
+        }
+
+        /* 作品展示页 - 双列 */
+        .project-page {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15mm;
+        }
+
+        .project-item {
+            position: relative;
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--color-gray-100);
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--color-gray-800);
+            margin-bottom: 4px;
+        }
+
+        .project-info {
+            font-size: 12px;
+            color: var(--color-gray-400);
+            letter-spacing: 1px;
+        }
+
+        /* 作品详情页 - 大图 */
+        .project-detail-page {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-header {
+            margin-bottom: 15mm;
+        }
+
+        .detail-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--color-gray-200);
+            margin-bottom: 10px;
+        }
+
+        .detail-title {
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--color-gray-800);
+            margin-bottom: 10px;
+        }
+
+        .detail-meta {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            letter-spacing: 2px;
+        }
+
+        .detail-main-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--color-gray-100);
+            overflow: hidden;
+            margin-bottom: 15mm;
+        }
+
+        .detail-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10mm;
+        }
+
+        .detail-grid-image {
+            aspect-ratio: 4/3;
+            background: var(--color-gray-100);
+            overflow: hidden;
+        }
+
+        .detail-grid-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 封底页 */
+        .back-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-decoration {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 150mm;
+            height: 150mm;
+            border: 1px solid var(--color-gray-200);
+            border-radius: 50%;
+        }
+
+        .back-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--color-gray-300);
+            margin-bottom: 30px;
+        }
+
+        .back-name {
+            font-size: 24px;
+            letter-spacing: 8px;
+            color: var(--color-gray-600);
+            margin-bottom: 20px;
+        }
+
+        .back-contact {
+            font-size: 13px;
+            color: var(--color-gray-400);
+            letter-spacing: 2px;
+        }
+
+        /* 打印样式 */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                padding: 20mm;
+                box-shadow: none;
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+        }
+
+        /* 屏幕预览 */
+        @media screen {
+            .page {
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 第1页：封面 -->
+    <div class="page cover-page">
+        <div class="cover-decoration-left"></div>
+        <div class="cover-decoration-right"></div>
+        <p class="cover-subtitle">PORTFOLIO</p>
+        <h1 class="cover-title">设计作品集</h1>
+        <div class="cover-line"></div>
+        <p class="cover-name">赵珂玛</p>
+        <p class="cover-contact">@komadesign</p>
+    </div>
+
+    <!-- 第2页：个人简介 -->
+    <div class="page about-page">
+        <div class="about-image-wrapper">
+            <div class="about-image-deco"></div>
+            <div class="about-image">
+                <img src="../portfolio-images/个人照片.jpg" alt="赵珂玛">
+            </div>
+        </div>
+        <div class="about-content">
+            <div class="section-number playfair">01</div>
+            <h2 class="about-title">个人简介</h2>
+            <div class="about-line"></div>
+            <p class="about-text">
+                专注于简约现代风格的室内空间设计。
+                我相信好的设计应该是简洁而不简单的，它能够在有限的空间里创造出无限的可能。
+            </p>
+            <p class="about-text">
+                我的设计理念是"简约而不简单"，通过对空间、光线和材料的精心把控，
+                为每一个项目注入独特的灵魂和温度。无论是住宅空间还是商业空间，
+                我都致力于创造出既美观又实用的设计作品。
+            </p>
+            <p style="font-size:13px; color: var(--color-gray-500); margin-top:20px;">
+                联系邮箱：komades1106@gmail.com
+            </p>
+            <div class="about-quote playfair">
+                "我喜欢在日常生活中寻找灵感，设计源于生活，设计也终将回到生活"
+            </div>
+        </div>
+    </div>
+
+    <!-- 第3页：精选作品 - 第一组 -->
+    <div class="page project-page">
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/开开心心大药房/屋顶花园/屋顶花园1.png" alt="开开心心大药房">
+            </div>
+            <h3 class="project-title">开开心心大药房</h3>
+            <p class="project-info">办公空间 · 江苏苏州 · 40000+㎡</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/海安酒店/普通大床房.jpg" alt="海安酒店">
+            </div>
+            <h3 class="project-title">海安酒店</h3>
+            <p class="project-info">酒店空间 · 江苏海安 · 8000㎡</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/甪直别墅/Enscape_2025-06-24-14-01-27.jpg" alt="甪直别墅">
+            </div>
+            <h3 class="project-title">甪直别墅</h3>
+            <p class="project-info">住宅空间 · 江苏苏州</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/金豪花园/Enscape_2025-05-29-17-30-05.jpg" alt="金豪花园">
+            </div>
+            <h3 class="project-title">金豪花园</h3>
+            <p class="project-info">住宅空间 · 安徽合肥 · 164㎡</p>
+        </div>
+    </div>
+
+    <!-- 第4页：精选作品 - 第二组 -->
+    <div class="page project-page">
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/天池能源消防站/1111 (3).jpg" alt="天池能源消防站">
+            </div>
+            <h3 class="project-title">天池能源消防站</h3>
+            <p class="project-info">办公空间 · 新疆昌吉 · 4000㎡</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/南京家装/Enscape_2025-06-20-11-47-07_Enscape 场景 1.jpg" alt="南京家装">
+            </div>
+            <h3 class="project-title">南京家装</h3>
+            <p class="project-info">住宅空间 · 江苏南京 · 180㎡</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/防城港宿舍楼/Enscape_2026-01-30-10-23-25.jpg" alt="防城港宿舍楼">
+            </div>
+            <h3 class="project-title">防城港宿舍楼</h3>
+            <p class="project-info">住宅空间 · 广西防城港 · 2500㎡</p>
+        </div>
+        <div class="project-item">
+            <div class="project-image">
+                <img src="../portfolio-images/六盘水康复中心/Enscape_2025-06-06-18-29-3324.jpg" alt="六盘水康复中心">
+            </div>
+            <h3 class="project-title">六盘水康复中心</h3>
+            <p class="project-info">医疗空间 · 贵州六盘水 · 5000㎡</p>
+        </div>
+    </div>
+
+    <!-- 第5页：开开心心大药房 详情页 -->
+    <div class="page project-detail-page">
+        <div class="detail-header">
+            <div class="detail-number playfair">01</div>
+            <h2 class="detail-title">开开心心大药房</h2>
+            <p class="detail-meta">办公空间 · 2024-2025 · 江苏苏州 · 40000+㎡</p>
+        </div>
+        <div class="detail-main-image">
+            <img src="../portfolio-images/开开心心大药房/屋顶花园/屋顶花园1.png" alt="开开心心大药房">
+        </div>
+        <div class="detail-grid">
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/开开心心大药房/总裁办（女）.jpg" alt="总裁办">
+            </div>
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/开开心心大药房/会议室.jpg" alt="会议室">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第6页：海安酒店 详情页 -->
+    <div class="page project-detail-page">
+        <div class="detail-header">
+            <div class="detail-number playfair">02</div>
+            <h2 class="detail-title">海安酒店</h2>
+            <p class="detail-meta">酒店空间 · 2025 · 江苏海安 · 8000㎡</p>
+        </div>
+        <div class="detail-main-image">
+            <img src="../portfolio-images/海安酒店/普通大床房.jpg" alt="海安酒店">
+        </div>
+        <div class="detail-grid">
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/海安酒店/套房一.jpg" alt="套房">
+            </div>
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/海安酒店/二层接待前厅.jpg" alt="接待厅">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第7页：甪直别墅 详情页 -->
+    <div class="page project-detail-page">
+        <div class="detail-header">
+            <div class="detail-number playfair">03</div>
+            <h2 class="detail-title">甪直别墅</h2>
+            <p class="detail-meta">住宅空间 · 2025 · 江苏苏州</p>
+        </div>
+        <div class="detail-main-image">
+            <img src="../portfolio-images/甪直别墅/Enscape_2025-06-24-14-01-27.jpg" alt="甪直别墅">
+        </div>
+        <div class="detail-grid">
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/甪直别墅/Enscape_2025-06-24-14-02-45.jpg" alt="别墅内景">
+            </div>
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/甪直别墅/平面图.jpg" alt="平面图">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第8页：金豪花园 详情页 -->
+    <div class="page project-detail-page">
+        <div class="detail-header">
+            <div class="detail-number playfair">04</div>
+            <h2 class="detail-title">金豪花园</h2>
+            <p class="detail-meta">住宅空间 · 2025 · 安徽合肥 · 164㎡</p>
+        </div>
+        <div class="detail-main-image">
+            <img src="../portfolio-images/金豪花园/Enscape_2025-05-29-17-30-05.jpg" alt="金豪花园">
+        </div>
+        <div class="detail-grid">
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/金豪花园/Enscape_2025-05-28-18-24-46.jpg" alt="金豪花园内景">
+            </div>
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/金豪花园/金濠花园北楼164户型平面图20250724-模型.jpg" alt="平面图">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第9页：天池能源消防站 详情页 -->
+    <div class="page project-detail-page">
+        <div class="detail-header">
+            <div class="detail-number playfair">05</div>
+            <h2 class="detail-title">天池能源消防站</h2>
+            <p class="detail-meta">办公空间 · 2025 · 新疆昌吉 · 4000㎡</p>
+        </div>
+        <div class="detail-main-image">
+            <img src="../portfolio-images/天池能源消防站/1111 (3).jpg" alt="天池能源消防站">
+        </div>
+        <div class="detail-grid">
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/天池能源消防站/急救3 (3).jpg" alt="急救室">
+            </div>
+            <div class="detail-grid-image">
+                <img src="../portfolio-images/天池能源消防站/Enscape_2025-04-25-14-47-53.jpg" alt="消防站内景">
+            </div>
+        </div>
+    </div>
+
+    <!-- 第10页：封底 -->
+    <div class="page back-page">
+        <div class="back-decoration"></div>
+        <p class="back-title playfair">THANK YOU</p>
+        <p class="back-name">赵珂玛</p>
+        <p class="back-contact">komades1106@gmail.com</p>
+        <p class="back-contact" style="margin-top:10px;">© 2025 赵珂玛</p>
+    </div>
+
+</body>
+</html>
